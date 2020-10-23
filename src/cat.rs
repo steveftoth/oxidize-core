@@ -1,6 +1,16 @@
+use std::fs::File;
 use clap::{Arg, App, AppSettings};
 
-fn main() {
+fn read_files(paths: Vec<&str>) -> Result<String, io::Error>{
+println!("{}" , paths.join(" "));
+for p in paths {
+    let f = File::open(p)?;
+    let mut 
+}
+
+}
+
+fn main()  -> std::io::Result<()>{
   let matches = App::new("cat")
       .setting(AppSettings::TrailingVarArg)
       .version("0.1.0")
@@ -10,7 +20,8 @@ fn main() {
       .arg(Arg::with_name("xtra").index(1).multiple(true))
       .get_matches();
 
-  let files: Vec<&str> = matches.values_of("xtra").unwrap().collect();
-  println!("{}",files.join(",")
-  );
+    match matches.values_of("xtra") {
+        Some(v) => read_files(v.collect()),
+            None => println!("No files to read"),
+    }
 }
