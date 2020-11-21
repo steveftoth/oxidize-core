@@ -12,6 +12,7 @@ fn read_files(paths: Vec<&str>) -> Result<(), std::io::Error> {
         };
 
         let mut s = String::new();
+        let mut buffer = [0; 10];
         match f.read_to_string(&mut s) {
             Err(why) => return Err(why),
             Ok(_) => print!("{}", s),
